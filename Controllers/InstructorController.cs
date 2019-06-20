@@ -28,7 +28,7 @@ namespace StudentExercises.Controllers
                 return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             }
         }
-
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             using(SqlConnection conn = Connection)
@@ -54,7 +54,6 @@ namespace StudentExercises.Controllers
                             Slack = reader.GetString(reader.GetOrdinal("Slack")),
                             CohortId = reader.GetInt32(reader.GetOrdinal("CohortId")),
                             Specialty = reader.GetString(reader.GetOrdinal("Specialty"))
-
                         };
 
                         // add to the list of instructors
@@ -70,17 +69,17 @@ namespace StudentExercises.Controllers
         }
 
         // GET: api/Instructor
-        [HttpGet]
+        //[HttpGet]
         //public IEnumerable<string> Get()
         //{
         //    return new string[] { "value1", "value2" };
         //}
 
         // GET: api/Instructor/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return "value hellooooo";
         }
 
         // POST: api/Instructor

@@ -34,6 +34,7 @@ namespace StudentExercises.Controllers
             using (SqlConnection conn = Connection)
             {
                 // open the connection
+                conn.Open();
                 using(SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT Id, StudentId, ExerciseId FROM StudentExercise;";
@@ -49,7 +50,7 @@ namespace StudentExercises.Controllers
                         StudentExercise studentExercise = new StudentExercise
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            StudentId = reader.GetInt32(reader.GetOrdinal("StudendId")),
+                            StudentId = reader.GetInt32(reader.GetOrdinal("StudentId")),
                             ExerciseId = reader.GetInt32(reader.GetOrdinal("ExerciseId"))
                         };
 
@@ -65,7 +66,7 @@ namespace StudentExercises.Controllers
         } 
 
         // GET: api/StudentExercise/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
