@@ -1,0 +1,14 @@
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\bin\Debug\netcoreapp2.2\StudentExercises.deps.json
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\bin\Debug\netcoreapp2.2\StudentExercises.runtimeconfig.json
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\bin\Debug\netcoreapp2.2\StudentExercises.runtimeconfig.dev.json
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\bin\Debug\netcoreapp2.2\StudentExercises.dll
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.csprojAssemblyReference.cache
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.csproj.CoreCompileInputs.cache
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.RazorAssemblyInfo.cache
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.RazorAssemblyInfo.cs
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.AssemblyInfoInputs.cache
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.AssemblyInfo.cs
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.RazorTargetAssemblyInfo.cache
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\bin\Debug\netcoreapp2.2\StudentExercises.pdb
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.dll
+C:\Users\jamekaechols\workspace\ex\StudentExercises\StudentExercises\obj\Debug\netcoreapp2.2\StudentExercises.pdb
