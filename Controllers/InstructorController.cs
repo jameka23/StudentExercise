@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using StudentExercises.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using StudentExercises.Models;
 
 namespace StudentExercises.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class InstructorController : ControllerBase
     {
         private readonly IConfiguration _config;
 
-        public StudentController(IConfiguration config)
+        public InstructorController(IConfiguration config)
         {
             _config = config;
         }
@@ -29,64 +29,67 @@ namespace StudentExercises.Controllers
             }
         }
 
-        [HttpGet]
         public async Task<IActionResult> Get()
         {
-            using (SqlConnection conn = Connection)
+            using(SqlConnection conn = Connection)
             {
+                // open connection
                 conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
+                using(SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id,
-                                                FirstName,
-                                                LastName,
-                                                Slack,
-                                                CohortId
-                                        FROM Student;";
+                    cmd.CommandText = @"SELECT Id, FirstName, LastName, Slack, CohortId, Specialty FROM Instructor;";
+
                     SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    List<Student> students = new List<Student>();
+
+                    // create a list to hold all the instructors
+                    List<Instructor> instructors = new List<Instructor>();
 
                     while (reader.Read())
                     {
-                        Student student = new Student
+                        Instructor instructor = new Instructor
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                             LastName = reader.GetString(reader.GetOrdinal("LastName")),
                             Slack = reader.GetString(reader.GetOrdinal("Slack")),
-                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId"))
+                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId")),
+                            Specialty = reader.GetString(reader.GetOrdinal("Specialty"))
+
                         };
 
-                        students.Add(student);
+                        // add to the list of instructors
+                        instructors.Add(instructor);
                     }
-                    reader.Close();
 
-                    return Ok(students);
-                }
-            }
+                    // close the connection and return list of instructors
+                    reader.Close();
+                    return Ok(instructors);
+
+                } // end sqlCommand
+            } // end sqlConnection
         }
 
-        // GET: api/Student
-        //[HttpGet]
+        // GET: api/Instructor
+        [HttpGet]
         //public IEnumerable<string> Get()
         //{
         //    return new string[] { "value1", "value2" };
         //}
 
-        // GET: api/Student/5
+        // GET: api/Instructor/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Student
+        // POST: api/Instructor
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/Student/5
+        // PUT: api/Instructor/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

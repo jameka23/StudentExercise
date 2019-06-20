@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using StudentExercises.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using StudentExercises.Models;
 
 namespace StudentExercises.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class ExerciseController : ControllerBase
     {
         private readonly IConfiguration _config;
 
-        public StudentController(IConfiguration config)
+        public ExerciseController(IConfiguration config)
         {
             _config = config;
         }
@@ -29,64 +29,62 @@ namespace StudentExercises.Controllers
             }
         }
 
-        [HttpGet]
         public async Task<IActionResult> Get()
         {
-            using (SqlConnection conn = Connection)
+            using(SqlConnection conn = Connection)
             {
+                // open the connection 
                 conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
+                using(SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id,
-                                                FirstName,
-                                                LastName,
-                                                Slack,
-                                                CohortId
-                                        FROM Student;";
+                    // create the query
+                    cmd.CommandText = @"SELECT Id, ExerciseName, ExerciseLanguage FROM Exercise;";
+
                     SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    List<Student> students = new List<Student>();
+
+                    // create list of exercises
+                    List<Exercise> exercises = new List<Exercise>();
 
                     while (reader.Read())
                     {
-                        Student student = new Student
+                        Exercise exercise = new Exercise
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                            Slack = reader.GetString(reader.GetOrdinal("Slack")),
-                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId"))
+                            ExerciseName = reader.GetString(reader.GetOrdinal("ExerciseName")),
+                            ExerciseLanguage = reader.GetString(reader.GetOrdinal("ExerciseLanguage"))
                         };
 
-                        students.Add(student);
+                        // add to the list of exercises
+                        exercises.Add(exercise);
                     }
-                    reader.Close();
 
-                    return Ok(students);
+                    // close the connection and return the list 
+                    reader.Close();
+                    return Ok(exercises);
                 }
             }
         }
-
-        // GET: api/Student
+        // GET: api/Exercise
         //[HttpGet]
         //public IEnumerable<string> Get()
         //{
         //    return new string[] { "value1", "value2" };
         //}
 
-        // GET: api/Student/5
+        // GET: api/Exercise/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Student
+        // POST: api/Exercise
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/Student/5
+        // PUT: api/Exercise/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
