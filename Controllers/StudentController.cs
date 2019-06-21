@@ -37,12 +37,14 @@ namespace StudentExercises.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id,
-                                                FirstName,
-                                                LastName,
-                                                Slack,
-                                                CohortId
-                                        FROM Student;";
+                    cmd.CommandText = @"SELECT s.Id,
+                                                s.FirstName,
+                                                s.LastName,
+                                                s.Slack,
+                                                s.CohortId,
+                                                c.CohortName
+                                        FROM Student s
+                                        JOIN Cohort c on s.CohortId = c.Id;";
                     SqlDataReader reader = await cmd.ExecuteReaderAsync();
                     List<Student> students = new List<Student>();
 

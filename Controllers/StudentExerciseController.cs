@@ -37,7 +37,15 @@ namespace StudentExercises.Controllers
                 conn.Open();
                 using(SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, StudentId, ExerciseId FROM StudentExercise;";
+                    cmd.CommandText = @"SELECT 
+                                            se.Id, 
+                                            se.StudentId, 
+                                            se.ExerciseId,
+                                            s.firstName,
+                                            e.ExerciseName
+                                            FROM StudentExercise se
+                                            JOIN Student s ON se.StudentId = s.Id
+                                            JOIN Exercise e on se.ExerciseId = e.Id;";
 
                     SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
